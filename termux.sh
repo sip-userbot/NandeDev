@@ -3,22 +3,22 @@
 __ziplink () {
     local regex
     regex='(https?)://github.com/.+/.+'
-    if [[ $PANDA_USERBOT_REPO == "PANDA_USERBOT" ]]
+    if [[ $NANDE_USERBOT_REPO == "NANDE_USERBOT" ]]
     then
-        echo "https://github.com/MultiUbot/Ubot-Panda/archive/main.zip"
-    elif [[ $PANDA_USERBOT_REPO == "UTAMA_USERBOT" ]]
+        echo "https://github.com/MultiUbot/Ubot-Nande/archive/main.zip"
+    elif [[ $NANDE_USERBOT_REPO == "UTAMA_USERBOT" ]]
     then
-        echo "https://github.com/MultiUbot/Ubot-Panda/archive/main.zip"
-    elif [[ $PANDA_USERBOT_REPO =~ $regex ]]
+        echo "https://github.com/MultiUbot/Ubot-Nande/archive/main.zip"
+    elif [[ $NANDE_USERBOT_REPO =~ $regex ]]
     then
-        if [[ $PANDA_USERBOT_REPO_BRANCH ]]
+        if [[ $NANDE_USERBOT_REPO_BRANCH ]]
         then
-            echo "${PANDA_USERBOT_REPO}/archive/${PANDA_USERBOT_REPO_BRANCH}.zip"
+            echo "${NANDE_USERBOT_REPO}/archive/${NANDE_USERBOT_REPO_BRANCH}.zip"
         else
-            echo "${PANDA_USERBOT_REPO}/archive/main.zip"
+            echo "${NANDE_USERBOT_REPO}/archive/main.zip"
         fi
     else
-        echo "https://github.com/MultiUbot/Ubot-Panda/archive/main.zip"
+        echo "https://github.com/MultiUbot/Ubot-Nande/archive/main.zip"
     fi
 }
 
@@ -26,11 +26,11 @@ __repolink () {
     local regex
     local rlink
     regex='(https?)://github.com/.+/.+'
-    if [[ $UPSTREAM_REPO == "PANDA_USERBOT" ]]
+    if [[ $UPSTREAM_REPO == "NANDE_USERBOT" ]]
     then
         rlink=`echo "${UPSTREAM_REPO}"`
     else
-        rlink=`echo "https://github.com/MultiUbot/Ubot-Panda"
+        rlink=`echo "https://github.com/MultiUbot/Ubot-NANDE"
     fi
     echo "$rlink"
 }
@@ -45,8 +45,8 @@ _install_python_version() {
 _install_deploy_git() {
     $(_install_python_version 'from git import Repo
 import sys
-OFFICIAL_UPSTREAM_REPO = "https://github.com/MultiUbot/Ubot-Panda"
-ACTIVE_BRANCH_NAME = "PandaUserbot"
+OFFICIAL_UPSTREAM_REPO = "https://github.com/MultiUbot/Ubot-Nande"
+ACTIVE_BRANCH_NAME = "Nande-Userbot"
 repo = Repo.init()
 origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
 origin.fetch()
@@ -68,25 +68,25 @@ repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
 }
 
 
-_install_pandauserbot () {
+_install_nandeuserbot () {
     local zippath
-    zippath="pandauserbot.zip"
+    zippath="nandeuserbot.zip"
     echo "  Downloading source code ..."
     wget -q $(__ziplink) -O "$zippath"
     echo "  Unpacking Data ..."
-    PANDA_USERBOTPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
+    NANDE_USERBOTPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
     unzip -qq "$zippath"
     echo "Done"
     echo "  Cleaning ..."
     rm -rf "$zippath"
     _install_deploy_git
-    cd $PANDA_USERBOTPATH
+    cd $NANDE_USERBOTPATH
     _start_install_git
     python3 ../setup/updater.py ../requirements.txt requirements.txt
     chmod -R 755 bin
-    echo "Starting PandaUserBot"
+    echo "Starting NANDEUserBot"
     echo "PROSES...... "
     python3 -m userbot
 }
 
-_install_pandauserbot
+_install_nandeuserbot

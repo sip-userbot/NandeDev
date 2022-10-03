@@ -1,6 +1,6 @@
 {
-  "name": "Panda-Userbot",
-  "description": "[Panda-Userbot] userbot Telegram modular yang berjalan pada Python 3.9+",
+  "name": "Nande-Userbot",
+  "description": "[Nande-Userbot] userbot Telegram modular yang berjalan pada Python 3.9+",
   "stack": "container",
   "env": {
     "API_ID": {
